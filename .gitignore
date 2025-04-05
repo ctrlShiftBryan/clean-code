@@ -1,0 +1,7 @@
+# TODO add standard gitignore
+
+.DS_Store
+.idea
+.vscode
+.env
+node_modules
