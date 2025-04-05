@@ -1,19 +1,5 @@
 ## Testing
 
-Testing is more important than shipping. If you have no tests or an inadequate amount, then every time you ship code you won't be sure that you didn't break anything.
-Deciding on what constitutes an adequate amount is up to your team, but having 100% coverage (all statements and branches)
-is how you achieve very high confidence and developer peace of mind. This means that in addition to having a great testing framework, you also need to use a good [coverage tool](https://github.com/gotwarlost/istanbul).
-
-There's no excuse to not write tests. There are [plenty of good JS test frameworks](http://jstherightway.org/#testing-tools) with typings support for TypeScript, so find one that your team prefers. When you find one that works for your team, then aim to always write tests for every new feature/module you introduce. If your preferred method is Test Driven Development (TDD), that is great, but the main point is to just make sure you are reaching your coverage goals before launching any feature, or refactoring an existing one.
-
-### The three laws of TDD
-
-1. You are not allowed to write any production code unless it is to make a failing unit test pass.
-
-2. You are not allowed to write any more of a unit test than is sufficient to fail, and; compilation failures are failures.
-
-3. You are not allowed to write any more production code than is sufficient to pass the one failing unit test.
-
 ### F.I.R.S.T. rules
 
 Clean tests should follow the rules:
@@ -35,7 +21,7 @@ Tests should also follow the _Single Responsibility Principle_. Make only one as
 **Bad:**
 
 ```ts
-import { assert } from 'chai';
+import { assert } from 'bun:test';
 
 describe('AwesomeDate', () => {
   it('handles date boundaries', () => {
@@ -83,7 +69,7 @@ When testing against specific literal values (strings, numbers, simple objects),
 **Bad:**
 
 ```ts
-import { assert } from 'chai'; // Or: import { expect } from 'bun:test';
+import { assert } from 'bun:test'; // Or: import { expect } from 'bun:test';
 
 function getUserGreeting(name: string): string {
   return `Hello, ${name}!`;
@@ -147,3 +133,190 @@ describe('Calendar', () => {
   });
 });
 ```
+
+### Prefer Stubs Over Mocks
+
+When writing tests, prefer simple stubs over complex mocks. Stubs focus on outcomes rather than implementation details, resulting in more maintainable tests that are less likely to break during refactoring.
+
+```ts
+// Function that uses the email sender
+const notifyUserOfLogin = async (userId: string, emailSender) => {
+  const userEmail = `user-${userId}@example.com`;
+  await emailSender(userEmail, 'New login detected');
+  return true;
+};
+```
+
+**Bad:**
+
+```ts
+import { expect, describe, it, mock } from 'bun:test';
+
+// Function that sends emails
+const sendEmail = async (to: string, message: string) => {
+  // Real implementation would connect to email server
+};
+
+describe('notifyUserOfLogin', () => {
+  it('should notify user of login', async () => {
+    // Complex mock with verification
+    const mockSendEmail = mock.fn();
+    mockSendEmail.mockResolvedValue(true);
+
+    await notifyUserOfLogin('123', mockSendEmail);
+
+    // Test focuses on implementation details
+    expect(mockSendEmail).toHaveBeenCalledTimes(1);
+    expect(mockSendEmail).toHaveBeenCalledWith(
+      'user-123@example.com',
+      'New login detected',
+    );
+  });
+});
+```
+
+**Good:**
+
+```ts
+import { expect, describe, it } from 'bun:test';
+
+// Function that sends emails
+const sendEmail = async (to: string, message: string) => {
+  // Real implementation would connect to email server
+};
+
+describe('notifyUserOfLogin', () => {
+  it('should successfully notify user of login', async () => {
+    // Simple stub that just works
+    const stubSendEmail = async () => true;
+
+    const result = await notifyUserOfLogin('123', stubSendEmail);
+
+    // Test focuses on behavior/outcome
+    expect(result).toMatchInlineSnapshot(`true`);
+  });
+});
+```
+
+The good example is better because it:
+
+- Uses a simple function stub without mock verification
+- Focuses on testing the outcome rather than implementation details
+- Won't break if you change how emails are formatted or sent
+- Is more resilient to refactoring
+
+### One Top-Level Describe Per File
+
+Tests should be organized with exactly one top-level describe block per test file, without nesting additional describe blocks. This improves test clarity, navigation, and maintainability.
+**Bad:**
+
+File: `user.test.ts`
+
+```ts
+import { expect, describe, it } from 'bun:test';
+
+// Multiple top-level describe blocks in one file
+describe('UserAuthentication', () => {
+  it('should validate user credentials', () => {
+    expect(validateCredentials('user', 'password123')).toMatchInlineSnapshot(
+      `true`,
+    );
+  });
+});
+
+describe('UserRegistration', () => {
+  it('should register new users', () => {
+    expect(registerUser('newuser', 'password123')).toMatchInlineSnapshot(
+      `true`,
+    );
+  });
+});
+
+// Nested describe blocks
+describe('UserManagement', () => {
+  describe('Profile', () => {
+    it('should update user profile', () => {
+      expect(updateProfile(123, { name: 'New Name' })).toMatchInlineSnapshot(
+        `true`,
+      );
+    });
+  });
+
+  describe('Preferences', () => {
+    it('should save user preferences', () => {
+      expect(savePreferences(123, { theme: 'dark' })).toMatchInlineSnapshot(
+        `true`,
+      );
+    });
+  });
+});
+```
+
+**Good:**
+
+File: `user.authentication.test.ts`
+
+```ts
+import { expect, describe, it } from 'bun:test';
+
+describe('UserAuthentication', () => {
+  it('should validate user credentials', () => {
+    expect(validateCredentials('user', 'password123')).toMatchInlineSnapshot(
+      `true`,
+    );
+  });
+
+  it('should reject invalid credentials', () => {
+    expect(validateCredentials('user', 'wrong')).toMatchInlineSnapshot(`false`);
+  });
+});
+```
+
+File: `user.registration.test.ts`
+
+```ts
+import { expect, describe, it } from 'bun:test';
+
+describe('UserRegistration', () => {
+  it('should register new users', () => {
+    expect(registerUser('newuser', 'password123')).toMatchInlineSnapshot(
+      `true`,
+    );
+  });
+
+  it('should prevent duplicate usernames', () => {
+    expect(registerUser('existing', 'password123')).toMatchInlineSnapshot(
+      `false`,
+    );
+  });
+});
+```
+
+File: `user.profile.test.ts`
+
+```ts
+import { expect, describe, it } from 'bun:test';
+
+describe('UserProfile', () => {
+  it('should update user profile', () => {
+    expect(updateProfile(123, { name: 'New Name' })).toMatchInlineSnapshot(
+      `true`,
+    );
+  });
+
+  it('should save user preferences', () => {
+    expect(savePreferences(123, { theme: 'dark' })).toMatchInlineSnapshot(
+      `true`,
+    );
+  });
+});
+```
+
+The good example is better because it:
+
+- Splits related tests into separate files by feature or responsibility
+- Each file contains exactly one top-level `describe` block
+- Avoids nested `describe` blocks
+- Makes it easier to locate tests for specific features
+- Reduces cognitive load when viewing test files
+- Allows for better parallel test execution
