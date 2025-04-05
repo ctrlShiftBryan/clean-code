@@ -2,6 +2,9 @@
   "name": "clean-code",
   "module": "index.ts",
   "type": "module",
+  "bin": {
+    "clean-code": "./cli.js"
+  },
   "scripts": {
     "format": "prettier --write ."
   },
