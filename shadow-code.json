@@ -1,0 +1,725 @@
+{
+  "rootNode": {
+    "id": "1b8f695c4ba258c30998fd3e7e8810998862c09c",
+    "name": "clean-code",
+    "path": "/Users/bryanarendt/code/clean-code",
+    "type": "folder",
+    "extension": "",
+    "lineCount": 0,
+    "sizes": {
+      "base": {
+        "size": 0,
+        "tokens": 26949,
+        "totalChildrenTokens": 26949,
+        "totalChildrenSize": 101691,
+        "totalChildrenCount": 25
+      },
+      "active": {
+        "size": 0,
+        "tokens": 26949,
+        "totalChildrenSize": 101691,
+        "totalChildrenTokens": 26949,
+        "totalChildrenCount": 25
+      }
+    },
+    "depth": 0,
+    "excluded": [],
+    "isExcluded": false,
+    "isOpen": true,
+    "metadata": {
+      "lastModified": "2025-04-05T11:16:06.617Z",
+      "created": "2025-04-05T06:58:59.125Z"
+    },
+    "children": [
+      {
+        "id": "6ac4d5aee7bf5022547ca45cde997e71f10c2881",
+        "name": "docs",
+        "path": "/Users/bryanarendt/code/clean-code/docs",
+        "type": "folder",
+        "extension": "",
+        "lineCount": 0,
+        "sizes": {
+          "base": {
+            "size": 0,
+            "tokens": 17466,
+            "totalChildrenTokens": 17466,
+            "totalChildrenSize": 73837,
+            "totalChildrenCount": 12
+          },
+          "active": {
+            "size": 0,
+            "tokens": 17466,
+            "totalChildrenSize": 73837,
+            "totalChildrenTokens": 17466,
+            "totalChildrenCount": 12
+          }
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": true,
+        "metadata": {
+          "lastModified": "2025-04-05T07:41:38.772Z",
+          "created": "2025-04-05T07:41:33.272Z"
+        },
+        "children": [
+          {
+            "id": "e60f860979d1a85061d3b76ef340d22a5dbba8cd",
+            "name": "clean-code",
+            "path": "/Users/bryanarendt/code/clean-code/docs/clean-code",
+            "type": "folder",
+            "extension": "",
+            "lineCount": 0,
+            "sizes": {
+              "base": {
+                "size": 0,
+                "tokens": 17466,
+                "totalChildrenTokens": 17466,
+                "totalChildrenSize": 73837,
+                "totalChildrenCount": 11
+              },
+              "active": {
+                "size": 0,
+                "tokens": 17466,
+                "totalChildrenSize": 73837,
+                "totalChildrenTokens": 17466,
+                "totalChildrenCount": 11
+              }
+            },
+            "depth": 2,
+            "excluded": [],
+            "isExcluded": false,
+            "isOpen": false,
+            "metadata": {
+              "lastModified": "2025-04-05T07:37:50.800Z",
+              "created": "2025-04-04T16:35:33.570Z"
+            },
+            "children": [
+              {
+                "id": "675260ffd47b32e9fc37d45649a3f3a6e7284a41",
+                "name": "01-introduction.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/01-introduction.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 42,
+                "sizes": {
+                  "base": {
+                    "size": 2005,
+                    "tokens": 497
+                  },
+                  "active": {
+                    "size": 2005,
+                    "tokens": 497
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:39:15.293Z",
+                  "created": "2025-04-04T17:21:38.410Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "d04b534459baee8f2fb026c43e9b7caddfa1dd3b",
+                "name": "02-variables.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/02-variables.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 226,
+                "sizes": {
+                  "base": {
+                    "size": 3743,
+                    "tokens": 1007
+                  },
+                  "active": {
+                    "size": 3743,
+                    "tokens": 1007
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.167Z",
+                  "created": "2025-04-04T16:35:33.577Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "ced4facdd1d9cc7b23cb6a6807cdffa2399b1648",
+                "name": "03-functions.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/03-functions.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 879,
+                "sizes": {
+                  "base": {
+                    "size": 22759,
+                    "tokens": 5413
+                  },
+                  "active": {
+                    "size": 22759,
+                    "tokens": 5413
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.293Z",
+                  "created": "2025-04-04T16:35:33.577Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "cd7b2f1e6a03e4aa803ae104c05d67b807ab2c21",
+                "name": "04-objects-and-data-structures.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/04-objects-and-data-structures.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 255,
+                "sizes": {
+                  "base": {
+                    "size": 5191,
+                    "tokens": 1315
+                  },
+                  "active": {
+                    "size": 5191,
+                    "tokens": 1315
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.316Z",
+                  "created": "2025-04-04T16:35:33.577Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "1821e8d6b14f091c5b4de3269c908d7b38e51b75",
+                "name": "05-classes.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/05-classes.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 299,
+                "sizes": {
+                  "base": {
+                    "size": 6793,
+                    "tokens": 1578
+                  },
+                  "active": {
+                    "size": 6793,
+                    "tokens": 1578
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.340Z",
+                  "created": "2025-04-04T16:35:33.578Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "d97892a23ed0227ff272ea5994b35e812f50c224",
+                "name": "06-solid.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/06-solid.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 422,
+                "sizes": {
+                  "base": {
+                    "size": 9596,
+                    "tokens": 2214
+                  },
+                  "active": {
+                    "size": 9596,
+                    "tokens": 2214
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.370Z",
+                  "created": "2025-04-04T16:35:33.578Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "dfe26c40ed2836a75a2ab62be0f67de61a6df76b",
+                "name": "07-testing.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/07-testing.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 323,
+                "sizes": {
+                  "base": {
+                    "size": 8496,
+                    "tokens": 2057
+                  },
+                  "active": {
+                    "size": 8496,
+                    "tokens": 2057
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:30:16.480Z",
+                  "created": "2025-04-04T16:35:33.578Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "05cbdac439fffb9e9eccd4fde5c0288ffb3ba7e3",
+                "name": "08-concurrency.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/08-concurrency.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 130,
+                "sizes": {
+                  "base": {
+                    "size": 4400,
+                    "tokens": 919
+                  },
+                  "active": {
+                    "size": 4400,
+                    "tokens": 919
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.397Z",
+                  "created": "2025-04-04T16:35:33.578Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "1d6bde2c74fd6c38c76bed2a27892b2c7979b48c",
+                "name": "09-error-handling.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/09-error-handling.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 138,
+                "sizes": {
+                  "base": {
+                    "size": 3638,
+                    "tokens": 877
+                  },
+                  "active": {
+                    "size": 3638,
+                    "tokens": 877
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.410Z",
+                  "created": "2025-04-04T16:35:33.579Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "f7df0ae129b58c288b486725fcfcf1d68dbc73d0",
+                "name": "10-project-standards.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/10-project-standards.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 76,
+                "sizes": {
+                  "base": {
+                    "size": 3605,
+                    "tokens": 779
+                  },
+                  "active": {
+                    "size": 3605,
+                    "tokens": 779
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:37:41.188Z",
+                  "created": "2025-04-04T16:35:33.579Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              },
+              {
+                "id": "234ef605151fdf2306130a7072e2ad68dc4e9773",
+                "name": "11-comments.md",
+                "path": "/Users/bryanarendt/code/clean-code/docs/clean-code/11-comments.md",
+                "type": "file",
+                "extension": ".md",
+                "lineCount": 164,
+                "sizes": {
+                  "base": {
+                    "size": 3611,
+                    "tokens": 810
+                  },
+                  "active": {
+                    "size": 3611,
+                    "tokens": 810
+                  }
+                },
+                "metadata": {
+                  "lastModified": "2025-04-05T07:08:45.462Z",
+                  "created": "2025-04-04T16:35:33.579Z"
+                },
+                "depth": 3,
+                "excluded": [],
+                "isExcluded": false,
+                "isOpen": false
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "2e751e24bb5377e33f64c47c1193ac9b14c254cd",
+        "name": "task",
+        "path": "/Users/bryanarendt/code/clean-code/task",
+        "type": "folder",
+        "extension": "",
+        "lineCount": 0,
+        "sizes": {
+          "base": {
+            "size": 0,
+            "tokens": 0,
+            "totalChildrenTokens": 0,
+            "totalChildrenSize": 0,
+            "totalChildrenCount": 0
+          },
+          "active": {
+            "size": 0,
+            "tokens": 0,
+            "totalChildrenSize": 0,
+            "totalChildrenTokens": 0,
+            "totalChildrenCount": 0
+          }
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": true,
+        "metadata": {
+          "lastModified": "2025-04-05T07:31:09.259Z",
+          "created": "2025-04-05T07:12:17.228Z"
+        },
+        "children": []
+      },
+      {
+        "id": "e7f4df3b84f5ed5b1dbbaa06b7b24f89d577dda6",
+        "name": ".prettierignore",
+        "path": "/Users/bryanarendt/code/clean-code/.prettierignore",
+        "type": "file",
+        "extension": "",
+        "lineCount": 14,
+        "sizes": {
+          "base": {
+            "size": 168,
+            "tokens": 42
+          },
+          "active": {
+            "size": 168,
+            "tokens": 42
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:08:29.246Z",
+          "created": "2025-04-05T07:08:27.414Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "b6ef199620ab8098782529ecb0fa8625356583b9",
+        "name": ".prettierrc.json",
+        "path": "/Users/bryanarendt/code/clean-code/.prettierrc.json",
+        "type": "file",
+        "extension": ".json",
+        "lineCount": 8,
+        "sizes": {
+          "base": {
+            "size": 105,
+            "tokens": 41
+          },
+          "active": {
+            "size": 105,
+            "tokens": 41
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:08:45.064Z",
+          "created": "2025-04-05T07:08:23.087Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "3ca9f04ca2dff6b451dbc374586f0cb6d92f7556",
+        "name": ".rooignore",
+        "path": "/Users/bryanarendt/code/clean-code/.rooignore",
+        "type": "file",
+        "extension": "",
+        "lineCount": 1,
+        "sizes": {
+          "base": {
+            "size": 9,
+            "tokens": 2
+          },
+          "active": {
+            "size": 9,
+            "tokens": 2
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:30:36.703Z",
+          "created": "2025-04-05T07:30:33.761Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "bbf5216cd9b85f0dea9afa7651c5a8d63c7e1e47",
+        "name": "bun.lockb",
+        "path": "/Users/bryanarendt/code/clean-code/bun.lockb",
+        "type": "file",
+        "extension": ".lockb",
+        "lineCount": 25,
+        "sizes": {
+          "base": {
+            "size": 3492,
+            "tokens": 2851
+          },
+          "active": {
+            "size": 3492,
+            "tokens": 2851
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:08:19.799Z",
+          "created": "2025-04-05T07:08:19.799Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "906b57ce3c38041959fb36ac547531fe89f48280",
+        "name": "cli.js",
+        "path": "/Users/bryanarendt/code/clean-code/cli.js",
+        "type": "file",
+        "extension": ".js",
+        "lineCount": 44,
+        "sizes": {
+          "base": {
+            "size": 1258,
+            "tokens": 293
+          },
+          "active": {
+            "size": 1258,
+            "tokens": 293
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:42:15.179Z",
+          "created": "2025-04-05T07:42:10.789Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "1e3a9b3be25b13e651ec2730952f1db5a505f4e7",
+        "name": "index.ts",
+        "path": "/Users/bryanarendt/code/clean-code/index.ts",
+        "type": "file",
+        "extension": ".ts",
+        "lineCount": 2,
+        "sizes": {
+          "base": {
+            "size": 31,
+            "tokens": 7
+          },
+          "active": {
+            "size": 31,
+            "tokens": 7
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:08:45.465Z",
+          "created": "2025-04-05T07:07:25.802Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "f1cbaddaaa573a923f9c85b87b5f03c0ff2000a7",
+        "name": "package.json",
+        "path": "/Users/bryanarendt/code/clean-code/package.json",
+        "type": "file",
+        "extension": ".json",
+        "lineCount": 19,
+        "sizes": {
+          "base": {
+            "size": 308,
+            "tokens": 109
+          },
+          "active": {
+            "size": 308,
+            "tokens": 109
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:42:05.491Z",
+          "created": "2025-04-05T07:07:25.800Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "7bc70bf05f6cffef19c467558f0749903cd141bf",
+        "name": "prompt.md",
+        "path": "/Users/bryanarendt/code/clean-code/prompt.md",
+        "type": "file",
+        "extension": ".md",
+        "lineCount": 1,
+        "sizes": {
+          "base": {
+            "size": 0,
+            "tokens": 0
+          },
+          "active": {
+            "size": 0,
+            "tokens": 0
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:30:29.191Z",
+          "created": "2025-04-05T07:20:32.586Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "d89bc5ccadce2ad06ea9035db4f4d9c6d535582f",
+        "name": "readme.md",
+        "path": "/Users/bryanarendt/code/clean-code/readme.md",
+        "type": "file",
+        "extension": ".md",
+        "lineCount": 1,
+        "sizes": {
+          "base": {
+            "size": 0,
+            "tokens": 0
+          },
+          "active": {
+            "size": 0,
+            "tokens": 0
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T06:59:32.489Z",
+          "created": "2025-04-05T06:59:32.489Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "bcf4fc6ed644c56155a106d69b262a936cb4c24b",
+        "name": "shadow-code.json",
+        "path": "/Users/bryanarendt/code/clean-code/shadow-code.json",
+        "type": "file",
+        "extension": ".json",
+        "lineCount": 733,
+        "sizes": {
+          "base": {
+            "size": 21848,
+            "tokens": 5962
+          },
+          "active": {
+            "size": 21848,
+            "tokens": 5962
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T11:16:20.571Z",
+          "created": "2025-04-05T11:16:06.617Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      },
+      {
+        "id": "549b6ccdd426a538ab9bb2c7d8c0b441d97af48c",
+        "name": "tsconfig.json",
+        "path": "/Users/bryanarendt/code/clean-code/tsconfig.json",
+        "type": "file",
+        "extension": ".json",
+        "lineCount": 28,
+        "sizes": {
+          "base": {
+            "size": 635,
+            "tokens": 176
+          },
+          "active": {
+            "size": 635,
+            "tokens": 176
+          }
+        },
+        "metadata": {
+          "lastModified": "2025-04-05T07:07:25.803Z",
+          "created": "2025-04-05T07:07:25.802Z"
+        },
+        "depth": 1,
+        "excluded": [],
+        "isExcluded": false,
+        "isOpen": false
+      }
+    ]
+  },
+  "stats": {
+    "base": {
+      "totalFiles": 22,
+      "totalFolders": 3,
+      "totalSize": 101691,
+      "totalTokens": 26949
+    },
+    "active": {
+      "totalFiles": 22,
+      "totalFolders": 3,
+      "totalSize": 101691,
+      "totalTokens": 26949
+    }
+  },
+  "availableIgnoreFiles": [".rooignore", ".gitignore"],
+  "activeIgnoreFile": ".gitignore"
+}

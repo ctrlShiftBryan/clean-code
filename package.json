@@ -6,7 +6,8 @@
     "clean-code": "./cli.js"
   },
   "scripts": {
-    "format": "prettier --write ."
+    "check": "bun format",
+    "format": "prettier --log-level=log --write . | grep -v '(unchanged)' || true"
   },
   "devDependencies": {
     "@types/bun": "latest",
