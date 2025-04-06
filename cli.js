@@ -102,7 +102,7 @@ function formatTimeDifference(startDate, endDate) {
 }
 
 // Function to copy docs
-function copyDocs() {
+function copyDocs(rl, callback) {
   // Determine source and destination paths
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
@@ -110,15 +110,96 @@ function copyDocs() {
   const destinationDir = process.cwd(); // Directory where npx command is run
   const destinationDocsDir = path.join(destinationDir, 'docs');
 
-  console.log(`Copying docs from ${sourceDocsDir} to ${destinationDocsDir}...`);
-
-  try {
-    copyDirRecursive(sourceDocsDir, destinationDocsDir);
-    console.log('Docs copied successfully!');
-  } catch (error) {
-    console.error('Error copying docs:', error);
-    process.exit(1);
+  // Check if source docs directory exists
+  if (!fs.existsSync(sourceDocsDir)) {
+    console.error(`Source docs directory not found: ${sourceDocsDir}`);
+    if (callback) callback();
+    return;
   }
+
+  // Get list of folders in the docs directory
+  const docsFolders = fs.readdirSync(sourceDocsDir).filter((item) => {
+    const itemPath = path.join(sourceDocsDir, item);
+    return fs.statSync(itemPath).isDirectory();
+  });
+
+  if (docsFolders.length === 0) {
+    console.log('No documentation folders found.');
+    if (callback) callback();
+    return;
+  }
+
+  // Create readline interface if not provided
+  let shouldCloseRl = false;
+  if (!rl) {
+    rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: true,
+    });
+    shouldCloseRl = true;
+  }
+
+  // Display options
+  console.log('Select which documentation to copy:');
+  console.log('0: All documentation');
+  docsFolders.forEach((folder, index) => {
+    console.log(`${index + 1}: ${folder}`);
+  });
+
+  rl.question(`Enter your choice (0-${docsFolders.length}): `, (answer) => {
+    const choice = parseInt(answer.trim());
+
+    if (isNaN(choice) || choice < 0 || choice > docsFolders.length) {
+      console.log(
+        `Invalid choice. Please enter a number between 0 and ${docsFolders.length}.`,
+      );
+      if (shouldCloseRl) rl.close();
+      if (callback) callback();
+      return;
+    }
+
+    try {
+      if (choice === 0) {
+        // Copy all folders
+        console.log(
+          `Copying all documentation from ${sourceDocsDir} to ${destinationDocsDir}...`,
+        );
+
+        if (!fs.existsSync(destinationDocsDir)) {
+          fs.mkdirSync(destinationDocsDir, { recursive: true });
+        }
+
+        docsFolders.forEach((folder) => {
+          const sourceFolderPath = path.join(sourceDocsDir, folder);
+          const destFolderPath = path.join(destinationDocsDir, folder);
+          copyDirRecursive(sourceFolderPath, destFolderPath);
+          console.log(`Copied ${folder} documentation.`);
+        });
+      } else {
+        // Copy specific folder
+        const selectedFolder = docsFolders[choice - 1];
+        console.log(`Copying ${selectedFolder} documentation...`);
+
+        const sourceFolderPath = path.join(sourceDocsDir, selectedFolder);
+        const destFolderPath = path.join(destinationDocsDir, selectedFolder);
+
+        if (!fs.existsSync(destinationDocsDir)) {
+          fs.mkdirSync(destinationDocsDir, { recursive: true });
+        }
+
+        copyDirRecursive(sourceFolderPath, destFolderPath);
+        console.log(`Copied ${selectedFolder} documentation.`);
+      }
+
+      console.log('Documentation copied successfully!');
+    } catch (error) {
+      console.error('Error copying documentation:', error);
+    }
+
+    if (shouldCloseRl) rl.close();
+    if (callback) callback();
+  });
 }
 
 // Function to process time tracking
@@ -286,7 +367,7 @@ function main() {
 
   // If command line argument is provided, execute the corresponding function
   if (arg === '1' || arg === 'docs') {
-    copyDocs();
+    copyDocs(null, null);
     return;
   } else if (arg === '2' || arg === 'task') {
     processTask(null, null);
@@ -311,8 +392,7 @@ function main() {
 
   rl.question('Enter your choice (1, 2, or 3): ', (answer) => {
     if (answer === '1') {
-      copyDocs();
-      rl.close();
+      copyDocs(rl, () => rl.close());
     } else if (answer === '2') {
       processTask(rl, () => rl.close());
     } else if (answer === '3') {
