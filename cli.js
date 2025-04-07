@@ -1,9 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import readline from 'readline';
+import { fixLineEndings } from './fix.ts'; // Import the function from the TS file
 import { execSync } from 'child_process';
 
 // Helper function to copy directories recursively
@@ -269,6 +270,24 @@ end-time: ${formattedEndTime}`;
   console.log(`Total time: ${totalTime}`);
 }
 
+// Function to fix line endings
+async function processFix() {
+  const targetDirectory = process.cwd(); // Use current working directory
+  console.log(`Fixing line endings in ${targetDirectory}...`);
+  try {
+    const changed = await fixLineEndings(targetDirectory);
+    if (changed) {
+      console.log(
+        'Line endings fixed for all files, excluding specified directories.',
+      );
+    } else {
+      console.log('All files already have correct line endings.');
+    }
+  } catch (err) {
+    console.error('Error fixing line endings:', err);
+  }
+}
+
 // Function to process task folder
 function processTask(rl, callback) {
   const destinationDir = process.cwd(); // Directory where command is run
@@ -361,7 +380,8 @@ function processTask(rl, callback) {
 }
 
 // Main function to handle the flow
-function main() {
+async function main() {
+  // Make main async
   // Check for command line arguments
   const arg = process.argv[2];
 
@@ -374,6 +394,9 @@ function main() {
     return;
   } else if (arg === '3' || arg === 'time') {
     processTime();
+    return;
+  } else if (arg === '4' || arg === 'fix') {
+    await processFix(); // Use await since fixLineEndings is async
     return;
   }
 
@@ -389,8 +412,10 @@ function main() {
   console.log('1. Copy docs');
   console.log('2. Process task folder');
   console.log('3. Track time');
+  console.log('4. Fix line endings');
 
-  rl.question('Enter your choice (1, 2, or 3): ', (answer) => {
+  rl.question('Enter your choice (1, 2, 3, or 4): ', async (answer) => {
+    // Make async
     if (answer === '1') {
       copyDocs(rl, () => rl.close());
     } else if (answer === '2') {
@@ -398,8 +423,11 @@ function main() {
     } else if (answer === '3') {
       processTime();
       rl.close();
+    } else if (answer === '4') {
+      await processFix(); // Use await
+      rl.close();
     } else {
-      console.log('Invalid choice. Please run again and select 1, 2, or 3.');
+      console.log('Invalid choice. Please run again and select 1, 2, 3, or 4.');
       rl.close();
     }
   });
@@ -414,6 +442,7 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log('  1, docs    Copy documentation files');
   console.log('  2, task    Process task folder');
   console.log('  3, time    Track time based on file creation dates');
+  console.log('  4, fix     Fix line endings in the current directory');
   console.log('  --help, -h Show this help message');
   console.log('');
   console.log('If no option is provided, an interactive prompt will be shown.');
