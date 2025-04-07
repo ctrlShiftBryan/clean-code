@@ -1,0 +1,102 @@
+
+<codebase><file><path>lib/stores/fileTree/features/nodes.feature.ts</path><content>import { StateCreator } from &apos;zustand&apos;;
+import { FileTreeStore } from &apos;../types&apos;;
+import { NodesFeatureActions } from &apos;./nodes.feature.types&apos;;
+
+export function setIsLoadingAction(state: FileTreeStore, isLoading): FileTreeStore {
+  return {
+    ...state,
+    nodes: {
+      ...state.nodes,
+      isLoading: isLoading
+    }
+  };
+}
+
+export const defaultNodesState = {
+  nodes: {
+    isLoading: false
+  }
+};
+
+export const createNodesFeatureActions: StateCreator&lt;
+  FileTreeStore,
+  [[&apos;zustand/devtools&apos;, never], [&apos;zustand/persist&apos;, unknown]],
+  [],
+  NodesFeatureActions
+&gt; = (set) =&gt; ({
+  setIsLoading: (isLoading) =&gt;
+    set((state) =&gt; setIsLoadingAction(state, isLoading), false, &apos;nodes/setIsLoading&apos;)
+}); </content></file><file><path>lib/stores/fileTree/features/nodes.feature.types.ts</path><content>export interface NodesFeature {
+  isLoading: boolean;
+}
+
+export type NodesFeatureActions = {
+  setIsLoading: (isLoading: boolean) =&gt; void;
+}; 
+</content></file><file><path>lib/stores/fileTree/features/nodes.feature.unit.test.ts</path><content>import { describe, it, expect } from &apos;vitest&apos;;
+import type { FileTreeStore } from &apos;../types&apos;;
+import { setIsLoadingAction } from &apos;./nodes.feature&apos;;
+
+describe(&apos;Nodes Actions&apos;, () =&gt; {
+  // Initial state setup
+  const initialState: Partial&lt;FileTreeStore&gt; = {
+    nodes: {
+      isLoading: false
+    }
+  };
+
+  describe(&apos;setIsLoadingAction&apos;, () =&gt; {
+    it(&apos;should set isLoading to true&apos;, () =&gt; {
+      const result = setIsLoadingAction(initialState as FileTreeStore, true);
+
+      expect(result.nodes).toMatchInlineSnapshot();
+    });
+
+    it(&apos;should set isLoading to false&apos;, () =&gt; {
+      const loadingState = {
+        ...initialState,
+        nodes: { ...initialState.nodes, isLoading: true }
+      };
+      const result = setIsLoadingAction(loadingState as FileTreeStore, false);
+
+      expect(result.nodes).toMatchInlineSnapshot();
+    });
+  });
+}); </content></file><file><path>lib/stores/fileTree/fileTree.store.ts</path><content>import { create } from &apos;zustand&apos;;
+import { devtools, persist, createJSONStorage } from &apos;zustand/middleware&apos;;
+import AsyncStorage from &apos;@react-native-async-storage/async-storage&apos;;
+import { FileTreeStore } from &apos;./types&apos;;
+import { createNodesFeatureActions, defaultNodesState } from &apos;./features/nodes.feature&apos;;
+
+// Create the store with proper typing
+const useStore = create&lt;FileTreeStore&gt;()(
+  devtools(
+    persist(
+      (set, get, store) =&gt; ({
+        ...defaultNodesState,
+        ...createNodesFeatureActions(set, get, store)
+      }),
+      {
+        name: &apos;fileTree-store-app-storage&apos;,
+        storage: createJSONStorage(() =&gt; AsyncStorage)
+      }
+    )
+  )
+);
+
+export const NodesHooks = {
+  useIsLoading: () =&gt; useStore((state) =&gt; state.nodes.isLoading)
+};
+
+export const NodesActions = {
+  useSetIsLoading: () =&gt; useStore((state) =&gt; state.setIsLoading)
+}; </content></file><file><path>lib/stores/fileTree/types.ts</path><content>import { NodesFeature, NodesFeatureActions } from &apos;./features/nodes.feature.types&apos;;
+
+export interface FileTreeStoreState {
+  nodes: NodesFeature;
+}
+
+export type FileTreeStoreActions = NodesFeatureActions;
+
+export type FileTreeStore = FileTreeStoreState &amp; FileTreeStoreActions; </content></file><file><path>.repoignore</path><content># Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
