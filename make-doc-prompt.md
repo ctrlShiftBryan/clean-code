@@ -2,7 +2,7 @@
 
 Document everything from the docs. Each page should have its own .md file.
 
-Put all files in: the /docs/(name of document)/ folder. You are restricted from adding any docs directly to /docs/ without them being in their own folder. If you are unsure what the "name of document" should be, Ask me before proceeding and I'll tell you.
+Put all files in: the docs/(name of document)/ folder. You are restricted from adding any docs directly to docs/ without them being in their own folder. If you are unsure what the "name of document" should be, Ask me before proceeding and I'll tell you.
 
 Format the following documentation using a custom multi-level outline style with the following pattern:
 
