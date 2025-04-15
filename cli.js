@@ -203,6 +203,77 @@ function copyDocs(rl, callback) {
   });
 }
 
+// Function to copy .roomodes file
+function copyFiles(callback) {
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const sourceCopyFilesDir = path.join(__dirname, 'copy-files');
+  const destinationDir = process.cwd(); // Directory where npx command is run
+
+  // Check if source directory exists
+  if (!fs.existsSync(sourceCopyFilesDir)) {
+    console.error(`Source copy-files directory not found: ${sourceCopyFilesDir}`);
+    if (callback) callback();
+    return;
+  }
+
+  // Get list of files in copy-files directory
+  const files = fs.readdirSync(sourceCopyFilesDir).filter(file => {
+    const filePath = path.join(sourceCopyFilesDir, file);
+    return fs.statSync(filePath).isFile();
+  });
+
+  // Create readline interface if one wasn't provided
+  let shouldCloseRl = false;
+  if (!callback) {
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: true,
+    });
+    shouldCloseRl = true;
+    callback = () => rl.close();
+  }
+
+  // Display files with numbers
+  console.log('Select a file to copy:');
+  files.forEach((file, index) => {
+    console.log(`${index + 1}: ${file}`);
+  });
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout,
+    terminal: true,
+  });
+
+  rl.question(`Enter your choice (1-${files.length}): `, (answer) => {
+    const choice = parseInt(answer.trim());
+
+    if (isNaN(choice) || choice < 1 || choice > files.length) {
+      console.log(`Invalid choice. Please enter a number between 1 and ${files.length}.`);
+      if (shouldCloseRl) rl.close();
+      if (callback) callback();
+      return;
+    }
+
+    const selectedFile = files[choice - 1];
+    const sourceFilePath = path.join(sourceCopyFilesDir, selectedFile);
+    const destinationFilePath = path.join(destinationDir, selectedFile);
+
+    try {
+      console.log(`Copying ${selectedFile}...`);
+      fs.copyFileSync(sourceFilePath, destinationFilePath);
+      console.log(`${selectedFile} copied successfully!`);
+    } catch (error) {
+      console.error(`Error copying ${selectedFile}:`, error);
+    }
+
+    if (shouldCloseRl) rl.close();
+    if (callback) callback();
+  });
+}
+
 // Function to process time tracking
 function processTime() {
   const destinationDir = process.cwd(); // Directory where command is run
@@ -398,6 +469,9 @@ async function main() {
   } else if (arg === '4' || arg === 'fix') {
     await processFix(); // Use await since fixLineEndings is async
     return;
+  } else if (arg === '5' || arg === 'modes') {
+    copyFiles(null);
+    return;
   }
 
   // If no valid argument is provided, use interactive prompt
@@ -413,8 +487,9 @@ async function main() {
   console.log('2. Process task folder');
   console.log('3. Track time');
   console.log('4. Fix line endings');
+  console.log('5. Copy .roomodes file');
 
-  rl.question('Enter your choice (1, 2, 3, or 4): ', async (answer) => {
+  rl.question('Enter your choice (1, 2, 3, 4, or 5): ', async (answer) => {
     // Make async
     if (answer === '1') {
       copyDocs(rl, () => rl.close());
@@ -426,8 +501,12 @@ async function main() {
     } else if (answer === '4') {
       await processFix(); // Use await
       rl.close();
+    } else if (answer === '5') {
+      copyFiles(() => rl.close());
     } else {
-      console.log('Invalid choice. Please run again and select 1, 2, 3, or 4.');
+      console.log(
+        'Invalid choice. Please run again and select 1, 2, 3, 4, or 5.',
+      );
       rl.close();
     }
   });
@@ -443,6 +522,7 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log('  2, task    Process task folder');
   console.log('  3, time    Track time based on file creation dates');
   console.log('  4, fix     Fix line endings in the current directory');
+  console.log('  5, modes   Copy a file from copy-files directory');
   console.log('  --help, -h Show this help message');
   console.log('');
   console.log('If no option is provided, an interactive prompt will be shown.');
