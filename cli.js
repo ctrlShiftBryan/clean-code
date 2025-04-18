@@ -212,13 +212,15 @@ function copyFiles(callback) {
 
   // Check if source directory exists
   if (!fs.existsSync(sourceCopyFilesDir)) {
-    console.error(`Source copy-files directory not found: ${sourceCopyFilesDir}`);
+    console.error(
+      `Source copy-files directory not found: ${sourceCopyFilesDir}`,
+    );
     if (callback) callback();
     return;
   }
 
   // Get list of files in copy-files directory
-  const files = fs.readdirSync(sourceCopyFilesDir).filter(file => {
+  const files = fs.readdirSync(sourceCopyFilesDir).filter((file) => {
     const filePath = path.join(sourceCopyFilesDir, file);
     return fs.statSync(filePath).isFile();
   });
@@ -251,7 +253,9 @@ function copyFiles(callback) {
     const choice = parseInt(answer.trim());
 
     if (isNaN(choice) || choice < 1 || choice > files.length) {
-      console.log(`Invalid choice. Please enter a number between 1 and ${files.length}.`);
+      console.log(
+        `Invalid choice. Please enter a number between 1 and ${files.length}.`,
+      );
       if (shouldCloseRl) rl.close();
       if (callback) callback();
       return;
