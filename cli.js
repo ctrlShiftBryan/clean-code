@@ -476,6 +476,15 @@ async function main() {
   } else if (arg === '5' || arg === 'modes') {
     copyFiles(null);
     return;
+  } else if (arg === '6' || arg === 'remove') {
+    // Run remove-emtpy-dir.mjs using Bun, resolving absolute path
+    try {
+      const removeScriptPath = path.join(__dirname, 'remove-emtpy-dir.mjs');
+      execSync(`bun "${removeScriptPath}"`, { stdio: 'inherit' });
+    } catch (error) {
+      console.error('Failed to run remove-emtpy-dir.mjs:', error.message);
+    }
+    return;
   }
 
   // If no valid argument is provided, use interactive prompt
@@ -492,8 +501,9 @@ async function main() {
   console.log('3. Track time');
   console.log('4. Fix line endings');
   console.log('5. Copy .roomodes file');
+  console.log('6. Remove empty directories');
 
-  rl.question('Enter your choice (1, 2, 3, 4, or 5): ', async (answer) => {
+  rl.question('Enter your choice (1, 2, 3, 4, 5, or 6): ', async (answer) => {
     // Make async
     if (answer === '1') {
       copyDocs(rl, () => rl.close());
@@ -507,9 +517,17 @@ async function main() {
       rl.close();
     } else if (answer === '5') {
       copyFiles(() => rl.close());
+    } else if (answer === '6') {
+      try {
+        const removeScriptPath = path.join(__dirname, 'remove-emtpy-dir.mjs');
+        execSync(`bun "${removeScriptPath}"`, { stdio: 'inherit' });
+      } catch (error) {
+        console.error('Failed to run remove-emtpy-dir.mjs:', error.message);
+      }
+      rl.close();
     } else {
       console.log(
-        'Invalid choice. Please run again and select 1, 2, 3, 4, or 5.',
+        'Invalid choice. Please run again and select 1, 2, 3, 4, 5, or 6.',
       );
       rl.close();
     }
@@ -527,6 +545,7 @@ if (process.argv.includes('--help') || process.argv.includes('-h')) {
   console.log('  3, time    Track time based on file creation dates');
   console.log('  4, fix     Fix line endings in the current directory');
   console.log('  5, modes   Copy a file from copy-files directory');
+  console.log('  6, remove  Remove empty directories');
   console.log('  --help, -h Show this help message');
   console.log('');
   console.log('If no option is provided, an interactive prompt will be shown.');
